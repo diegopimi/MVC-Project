@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MyProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="atype" EntityType="MyProjectModel.atype" />
+    <EntitySet Name="book" EntityType="MyProjectModel.book" />
+    <EntitySet Name="book_class" EntityType="MyProjectModel.book_class" />
+    <EntitySet Name="istate" EntityType="MyProjectModel.istate" />
+    <EntitySet Name="user" EntityType="MyProjectModel.user" />
+    <AssociationSet Name="FK_user_atype" Association="MyProjectModel.FK_user_atype">
+      <End Role="atype" EntitySet="atype" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_book_book" Association="MyProjectModel.FK_book_book">
+      <End Role="book_class" EntitySet="book_class" />
+      <End Role="book" EntitySet="book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_book" Association="MyProjectModel.FK_user_book">
+      <End Role="book" EntitySet="book" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_istate" Association="MyProjectModel.FK_user_istate">
+      <End Role="istate" EntitySet="istate" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="atype">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="MyProjectModel.FK_user_atype" FromRole="atype" ToRole="user" />
+  </EntityType>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="author" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idBook_class" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="book_class" Relationship="MyProjectModel.FK_book_book" FromRole="book" ToRole="book_class" />
+    <NavigationProperty Name="user" Relationship="MyProjectModel.FK_user_book" FromRole="book" ToRole="user" />
+  </EntityType>
+  <EntityType Name="book_class">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="book" Relationship="MyProjectModel.FK_book_book" FromRole="book_class" ToRole="book" />
+  </EntityType>
+  <EntityType Name="istate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="MyProjectModel.FK_user_istate" FromRole="istate" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="idState" Type="Int32" />
+    <Property Name="bookreq" Type="Int32" />
+    <Property Name="acctype" Type="Int32" />
+    <NavigationProperty Name="atype" Relationship="MyProjectModel.FK_user_atype" FromRole="user" ToRole="atype" />
+    <NavigationProperty Name="book" Relationship="MyProjectModel.FK_user_book" FromRole="user" ToRole="book" />
+    <NavigationProperty Name="istate" Relationship="MyProjectModel.FK_user_istate" FromRole="user" ToRole="istate" />
+  </EntityType>
+  <Association Name="FK_user_atype">
+    <End Type="MyProjectModel.atype" Role="atype" Multiplicity="0..1" />
+    <End Type="MyProjectModel.user" Role="user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="atype">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="acctype" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_book_book">
+    <End Type="MyProjectModel.book_class" Role="book_class" Multiplicity="1" />
+    <End Type="MyProjectModel.book" Role="book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book_class">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="book">
+        <PropertyRef Name="idBook_class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_book">
+    <End Type="MyProjectModel.book" Role="book" Multiplicity="0..1" />
+    <End Type="MyProjectModel.user" Role="user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="bookreq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_istate">
+    <End Type="MyProjectModel.istate" Role="istate" Multiplicity="0..1" />
+    <End Type="MyProjectModel.user" Role="user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="istate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="idState" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyProjectModelStoreContainer" CdmEntityContainer="MyProjectEntities">
+    <EntitySetMapping Name="atype">
+      <EntityTypeMapping TypeName="MyProjectModel.atype">
+        <MappingFragment StoreEntitySet="atype">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="book">
+      <EntityTypeMapping TypeName="MyProjectModel.book">
+        <MappingFragment StoreEntitySet="book">
+          <ScalarProperty Name="idBook_class" ColumnName="idBook_class" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="book_class">
+      <EntityTypeMapping TypeName="MyProjectModel.book_class">
+        <MappingFragment StoreEntitySet="book_class">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="istate">
+      <EntityTypeMapping TypeName="MyProjectModel.istate">
+        <MappingFragment StoreEntitySet="istate">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="MyProjectModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="acctype" ColumnName="acctype" />
+          <ScalarProperty Name="bookreq" ColumnName="bookreq" />
+          <ScalarProperty Name="idState" ColumnName="idState" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
