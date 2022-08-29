@@ -1,0 +1,58 @@
+﻿
+@model List<MyProject.Models.TableViewModels.UserTableVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href = '@Url.Content("~/User/Add")'" value="New" />
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+
+            @foreach (var element in Model)
+            {
+             <tr>
+                <td>@element.Id </td>
+                <td>@element.Email </td>
+                <td>
+                    <input onclick="jsDelete(@element.Id);" type="button" value="Delete" class="btn btn-danger" />
+                    <input onclick="document.location.href = '@Url.Content("~/User/Edit/"+element.Id)'" type="button" value="Edit" class="btn btn-default" />
+                </td>
+             </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script>
+    function jsDelete(id) {
+        if (confirm("Are you sure you want to delete user " + id + "?")) { // notification message
+
+            url = "@Url.Content("~/User/Delete")" + "/" + id; //receibe
+            $.post(url, function (data) { //jquery $ ajax petition that receives an Url, then executes posteriorly function(data), 'data' is given to 'function' if the post petition succeeds
+                if (data == 1) {            // notice that 1 is given by the delete function Conent
+                    document.location.href = "@Url.Content("~/User/")"  //redirect to User index
+                }
+                else {
+                    alert("An error ocurred") 
+                }
+            })
+        }
+    }
+</script>
+
+

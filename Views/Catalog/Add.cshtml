@@ -1,0 +1,35 @@
+﻿@model MyProject.Models.ViewModels.CatalogViewModel
+@{
+    ViewBag.Title = "Add";
+}
+<h2>New Entry</h2>
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Add", "Catalog", FormMethod.Post, new { role = "form", @class = "" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationMessage("error", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(d => d.Author)
+            @Html.TextBoxFor(d => d.Author, new { @class = "form-control" })
+            @Html.ValidationMessage("Author", new { @class = "text-danger" }) <br />
+
+            @Html.LabelFor(d => d.Title)
+            @Html.TextBoxFor(d => d.Title, new { @class = "form-control" })
+            @Html.ValidationMessage("Title", new { @class = "text-danger" }) <br />
+
+            @Html.LabelFor(d => d.IdBook_Class)
+            @Html.TextBoxFor(d => d.IdBook_Class, new { @class = "form-control" })
+            @Html.ValidationMessage("Book Classification", new { @class = "text-danger" }) <br />
+
+            <div style="text-align:right;">
+                <input type="submit" class="btn btn-success" value="Create" />
+            </div>
+
+        }
+
+    </div>
+</div>

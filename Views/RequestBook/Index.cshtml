@@ -1,0 +1,32 @@
+﻿@model List<MyProject.Models.TableViewModels.CatalogTableVM>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Request your Book</h2>
+
+<h3>Search by category</h3>
+
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+
+            @foreach (var element in Model)
+            {
+                <tr>
+                    <td>@element.ClassId </td>
+                    <td>@element.Classname </td>
+                    <td>
+                        <input onclick="document.location.href = '@Url.Content("~/RequestBook/BookList/"+element.ClassId)'" type="button" value="See " class="btn btn-default" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+﻿
+@{
+    
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div class="row">
+    <form id="frm">
+        <!-- We see that we call this form section "frm" -->
+
+        <div class="col-lg-1 col-lg-offset-0">
+            Username:
+            <input type="text" name="user" />
+            Password:
+            <input type="password" name="password" />
+            <input type="submit" class="btn btn-success" value="Login" />
+        </div>
+    </form>
+</div>
+
+
+@section scripts
+{
+    <script>
+    $(document).ready(function () { //the arroba script above allows for this section to be loaded after after render body
+                                    //if we didn't have this, it would have loaded before the jquery (in render body) and would have not worked
+                                    //the $ represents a selector... see OneNote
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+
+            url = "@Url.Content("~/Access/Enter")" //function Enter... directed to
+
+            parameters = $(this).serialize() //'this' is selecting the parent "#frm" and obtain inputs serialized
+
+            $.post(url, parameters, function (data) {
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                }
+                else {
+                    alert(data);
+                }
+            })
+        })
+    })
+    </script>
+}
+
+
